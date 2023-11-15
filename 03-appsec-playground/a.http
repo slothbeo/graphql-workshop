@@ -1,0 +1,30 @@
+
+# @name login
+@apiKey={{$dotenv APPSEC_API_KEY}}
+@apiKeySecret={{$dotenv APPSEC_API_KEY_SECRET}}
+
+// https://github.com/mkol5222/appsec-publish-tf/blob/main/publish.tf#L4C1-L18C2
+POST https://cloudinfra-gw.portal.checkpoint.com/auth/external
+Content-Type: application/json
+
+{"clientId":"{{apiKey}}","accessKey":"{{apiKeySecret}}"}
+
+
+###
+@token = {{login.response.body.data.token}}
+
+POST https://cloudinfra-gw.portal.checkpoint.com/app/i2//graphql/V1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+X-REQUEST-TYPE: GraphQL
+
+query Q1  {
+  getAssets(userDefined: true) {
+    status 
+      assets  {
+        id
+        name
+       state
+      }
+  }
+}

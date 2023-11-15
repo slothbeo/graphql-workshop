@@ -10,6 +10,7 @@ X-REQUEST-TYPE: GraphQL
 
 { 
   helloWorld
+  hello(name:"Martin")
 }
 
 ###
@@ -43,6 +44,24 @@ Content-Type: application/json
   "query": "{ helloWorld }"
 }
 
+###
+
+# curl 'http://127.0.0.1:8000/graphql' \
+#   -H 'content-type: application/json' \
+#   --data-raw '{"query":"query MyQuery {\n  minus(a: 100, b: 10)\n}","operationName":"MyQuery","extensions":{}}' \
+
+POST http://127.0.0.1:8000/graphql
+content-type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query MyQuery($a: Int!, $b: Int!) {  
+  minus(a: $a, b: $b)
+  helloWorld 
+}
+
+{
+  "a": 200, "b":100
+}
 ###
 #
 # one may also use Chrome Dev Tools / Network / Copy as CURL to start

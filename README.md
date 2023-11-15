@@ -4,9 +4,9 @@
 
 * control and query Check Point product with GraphQL API
 
-* GraphQL is powering *AppSec (Horizon Policy) API* and it has *GraphQL API Playground* in the portal
+* GraphQL is powering [*AppSec (Horizon Policy) API*](https://appsec-doc.inext.checkpoint.com/references/management-api) and it has [*GraphQL API Playground*](https://portal.checkpoint.com/dashboard/policy#/support/api/) in the portal
 
-* more products are adopting GraphQL - e.g. Harmony Endpoint *Threat Hunting*
+* more products are adopting GraphQL - e.g. Harmony Endpoint [*Threat Hunting*](https://sc1.checkpoint.com/documents/latest/ThAPIs/index.html)
 
 * some CP products are using GraphQL and keep it internal (web UI for Harmony Endpoint)
 

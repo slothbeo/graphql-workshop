@@ -1,9 +1,23 @@
 
 # GraphQL with CloudGuard AppSec
 
+Will use `playground.http` to guide you through Horizion Policy (AppSec) API.
+
+Obtain API key in Global Settings / API Keys: [https://portal.checkpoint.com/dashboard/settings/api-keys](https://portal.checkpoint.com/dashboard/settings/api-keys)
+![API Key creation](image-2.png)
+Depend on Horizon Policy API key from your tenant. Placed to .env in this folder, similar to:
+```bash
+
+```
+
+![Horizon Policy API Playground](image.png)
+
+![Capture request as CURL command](image-1.png)
 
 
-references - sample use of GraphQL API with CloudGuard AppSec
+
+
+## More references - sample use of GraphQL API with CloudGuard AppSec
 
 * publish AppSec policy from *Terraform* without external CLI tool:
 https://github.com/mkol5222/appsec-publish-tf/blob/main/publish.tf#L4C1-L18C2

@@ -1,3 +1,11 @@
+###
+#
+# 1. opened Infinity Portal in Horizon Policy API Playground in Support section:
+#   https://portal.checkpoint.com/dashboard/policy#/support/api/
+# 
+# 2. in web browser DevTools / Network tab / copy as curl(bash) - capturing request to API
+#   ilustrated below
+#
 # curl 'https://cloudinfra-gw.portal.checkpoint.com/app/i2//graphql/V1' \
 #   -H 'authority: cloudinfra-gw.portal.checkpoint.com' \
 #   -H 'accept: */*' \
@@ -19,6 +27,12 @@
 #   --data-raw '{"query":"\nquery ExampleQuery {\n  getAssets {\n    status\n      assets {\n        id\n        name\n      }\n  }\n}\n","variables":null,"operationName":"ExampleQuery"}' \
 #   --compressed
 
+
+#
+# it can be translated to .http file format of REST Client in VScode:
+# notice 401 Unauthorized => auth is still an issue
+# need to exchange Horizon Policy API key for the token
+#
 POST https://cloudinfra-gw.portal.checkpoint.com/app/i2//graphql/V1 HTTP/1.1
 Host: cloudinfra-gw.portal.checkpoint.com
 Authorization: Bearer aaa
@@ -27,7 +41,11 @@ Content-Type: application/json
 {"query":"\nquery ExampleQuery {\n  getAssets {\n    status\n      assets {\n        id\n        name\n      }\n  }\n}\n","variables":null,"operationName":"ExampleQuery"}
 
 ###
-# @name login
+
+#
+# this is sample from Terraform code to login with API key
+# to obtain auth token - see https://github.com/mkol5222/appsec-publish-tf/blob/main/publish.tf#L4C1-L18C2
+#
 
 #
 # 
@@ -47,6 +65,15 @@ Content-Type: application/json
 #   token = jsondecode(data.http.login.response_body)["data"]["token"]
 # }
 
+#
+# assuming Horizon Policy API key in .env file (.gitignore -ed) with
+#  APPSEC_API_KEY and APPSEC_API_KEY_SECRET actual values
+#
+# we rewrite to .http code
+#   notice: request is named, so we may reference token later
+#
+
+# @name login
 @apiKey={{$dotenv APPSEC_API_KEY}}
 @apiKeySecret={{$dotenv APPSEC_API_KEY_SECRET}}
 
@@ -59,6 +86,9 @@ Content-Type: application/json
 
 
 ###
+#
+# with token from login rquest, API calls to AppSec are possible:
+#
 @token = {{login.response.body.data.token}}
 POST https://cloudinfra-gw.portal.checkpoint.com/app/i2//graphql/V1 HTTP/1.1
 Authorization: Bearer {{token}}
@@ -77,7 +107,9 @@ query ExampleQuery {
 }
 
 ###
-
+# 
+# policy changes may also be published
+#
 POST https://cloudinfra-gw.portal.checkpoint.com/app/i2//graphql/V1 HTTP/1.1
 Authorization: Bearer {{token}}
 Content-Type: application/json

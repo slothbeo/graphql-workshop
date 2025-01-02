@@ -22,6 +22,14 @@ function multiply(_: any, args) {
   };
 }
 
+function divide(_: any, args) {
+  console.log('divide', JSON.stringify(args, null, 2))
+  return { 
+    num: (args.x / args.y),
+    greeting: "Hi from server!"
+  };
+}
+
 function minus(_: any, args: { a: number, b: number }) {
   return args.a - args.b;
 }
@@ -33,7 +41,8 @@ const resolvers = {
     helloWorld,
     hello,
     minus,
-    multiply
+    multiply,
+    divide
   },
 };
 

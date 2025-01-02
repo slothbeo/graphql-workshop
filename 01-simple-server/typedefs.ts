@@ -5,6 +5,11 @@ type MultiplyResponse {
     num: Float
 }
 
+type DivideResponse {
+    greeting: String
+    num: Float
+}
+
 type Query {
     sum2(a: Int!, b: Int!): Int!
     helloWorld: String!
@@ -12,6 +17,7 @@ type Query {
     minus(a: Int!, b: Int!): Int!
 
     multiply(x: Float, y: Float): MultiplyResponse
+    divide(x: Float, y: Float): DivideResponse
 }
 `;
 

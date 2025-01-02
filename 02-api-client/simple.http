@@ -3,7 +3,7 @@
 # notice "pseudo header" X-REQUEST-TYPE: GraphQL
 #   REST client ext. helps us to build GraphQL req. body
 #
-POST http://0.0.0.0:8000/graphql
+POST http://0.0.0.0:3000/graphql
 Content-Type: application/json
 Authorization: Bearer xxx
 X-REQUEST-TYPE: GraphQL
@@ -50,7 +50,7 @@ Content-Type: application/json
 #   -H 'content-type: application/json' \
 #   --data-raw '{"query":"query MyQuery {\n  minus(a: 100, b: 10)\n}","operationName":"MyQuery","extensions":{}}' \
 
-POST http://127.0.0.1:8000/graphql
+POST http://127.0.0.1:3000/graphql
 content-type: application/json
 X-REQUEST-TYPE: GraphQL
 
@@ -60,7 +60,7 @@ query MyQuery($a: Int!, $b: Int!) {
 }
 
 {
-  "a": 200, "b":100
+  "a": 350, "b":100
 }
 ###
 #
